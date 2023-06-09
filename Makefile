@@ -3,35 +3,50 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+         #
+#    By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 02:03:16 by moel-asr          #+#    #+#              #
-#    Updated: 2023/06/08 21:20:07 by moel-asr         ###   ########.fr        #
+#    Updated: 2023/06/09 15:25:50 by kmahdi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
-CFLAGS = -Wall -Wextra -Werror
+SRC = main.c\
+	./rey_casting/get_next_line/get_next_line.c\
+	./rey_casting/get_next_line/get_next_line_utils.c\
+	./rey_casting/main_rey.c\
+	./rey_casting/utils.c\
 
-SRCS = main.c
+OBJ_DIR = files_objects
 
-OBJS = $(SRCS:.c=.o)
+OBJ= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
-all : $(NAME)
+CC = cc
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# CFLAGS=  -Wall -Wextra -Werror 
 
-$(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -c $(SRCS)
+MLX= -lmlx -framework OpenGL -framework AppKit
 
-clean :
-	rm -f $(OBJS)
+DIB= -fsanitize=address -g3
 
-fclean : clean
-	rm -f $(NAME)
+$(RM) = rm -f 
+  
+all: $(NAME)
 
-re : fclean all
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) ${CFLAGS} -c $< -o $@
 
-.PHONY : clean fclean bonus
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(MLX) $(OBJ) $(DIB) -o $(NAME)
+
+clean:
+	$(RM) $(OBJ)
+	@$(RM) -rf $(OBJ_DIR)
+
+fclean: clean
+	$(RM) $(NAME)
+	$(RM) -rf $(OBJ_DIR)
+
+re: fclean all
