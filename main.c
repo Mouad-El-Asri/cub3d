@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:00:24 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/06/09 15:40:43 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/06/10 20:13:03 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "./parsing/parsing.h"
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
+	t_pars	var;
 
-	if (argc != 2)
-		exit_msg("ERROR : \n	wrong arguments\n", 1);
-	rey_casting(map, argv[1]);
+	var.args = argc;
+	var.map_path = argv[1];
+	ft_check_path_errors(&var);
+	ft_check_map_and_textures_errors(&var);
 }

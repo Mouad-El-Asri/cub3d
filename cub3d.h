@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 09:57:18 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/06/09 15:40:32 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/06/09 18:14:07 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@
 # include <limits.h>
 # include <stdio.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
-# endif
+# include "minilibft/minilibft.h"
+# include "get_next_line/get_next_line.h"
 
 typedef struct s_map
 {
 	char			**map;
 	int				width;
-	int				height;	
+	int				height;
+	int				x;
+	int				y;
 }				t_map;
 
 void	rey_casting(t_map *map, char *argv);
