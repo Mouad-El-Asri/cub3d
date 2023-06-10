@@ -6,11 +6,11 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/10 20:30:54 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:17:38 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "parser.h"
 
 int	is_whitespace(char *str)
 {
@@ -69,7 +69,7 @@ void	check_color_and_start_position(char *str, int *arr, t_pars *var)
 		arr[5]++;
 }
 
-void	ft_check_textures(char *line, t_pars *var, int fd)
+void	ft_check_textures(char **line, t_pars *var, int fd)
 {
 	int			i;
 	char		*sub_str;
@@ -79,16 +79,16 @@ void	ft_check_textures(char *line, t_pars *var, int fd)
 	ft_bzero(check_arr, sizeof check_arr);
 	while (i < 6)
 	{
-		if (!line)
+		if (!(*line))
 			break ;
-		else if (is_whitespace(line))
+		else if (is_whitespace(*line))
 		{
-			sub_str = ft_substr(ft_strtrim(line, " \t"), 0, 2);
+			sub_str = ft_substr(ft_strtrim((*line), " \t"), 0, 2);
 			check_color_and_start_position(sub_str, check_arr, var);
-			var->textures[i++] = ft_strdup(ft_strtrim(line, " \t"));
+			var->textures[i++] = ft_strdup(ft_strtrim((*line), " \t"));
 		}
-		free(line);
-		line = get_next_line(fd);
+		free(*line);
+		*line = get_next_line(fd);
 	}
 	var->textures[i] = NULL;
 	i = 0;
@@ -101,20 +101,20 @@ void	ft_check_textures(char *line, t_pars *var, int fd)
 	}
 }
 
-// void	ft_check_map(char *line, t_pars *var, int fd)
-// {
-	
-// }
-
-void	ft_read_textures_and_map(t_pars *var)
+void	ft_check_map(char **line, t_pars *var, int fd)
 {
-	int		fd;
-	char	*line;
+	int	i;
 
-	fd = open(var->map_path, O_RDONLY);
-	var->textures = (char **)malloc(sizeof(char *) * (6 + 1));
-	var->map = (char **)malloc(sizeof(char *) * (var->map_lines_count));
-	line = get_next_line(fd);
-	ft_check_textures(line, var, fd);
-	close(fd);
+	i = 0;
+	while (is_whitespace(*line) == 0)
+		*line = get_next_line(fd);
+	while (i < var->map_lines_count)
+	{
+		var->map[i++] = ft_strdup(*line);
+		free(*line);
+		*line = get_next_line(fd);
+		if (i < var->map_lines_count && is_whitespace(*line) == 0)
+			exit_msg("Error\nUnexpected whitespace found in the map\n", 1);
+	}
+	var->map[i] = NULL;
 }

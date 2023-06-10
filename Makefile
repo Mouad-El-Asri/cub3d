@@ -6,15 +6,15 @@
 #    By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 02:03:16 by moel-asr          #+#    #+#              #
-#    Updated: 2023/06/09 18:23:48 by moel-asr         ###   ########.fr        #
+#    Updated: 2023/06/10 23:20:21 by moel-asr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRC = main.c \
-	./parsing/check_errors.c \
-	./parsing/check_path_and_map.c \
+	./parser/check_errors.c \
+	./parser/check_path_and_map.c \
 	./get_next_line/get_next_line.c \
 	./rey_casting/utils.c
 
