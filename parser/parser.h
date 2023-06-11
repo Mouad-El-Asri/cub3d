@@ -26,13 +26,16 @@ typedef struct s_pars
 }	t_pars;
 
 void	check_path_errors(t_pars *var);
-void	check_walls(t_pars *var);
-int		is_closed(char c);
+void	check_map_walls(t_pars *var);
+int		is_valid_character(char c);
 void	check_map_and_textures_errors(t_pars *var);
 int		is_whitespace(char *str);
 void	count_map_lines(t_pars *var);
 void	read_and_check_textures(char **line, t_pars *var, int fd);
 void	read_and_check_map(char **line, t_pars *var, int fd);
 void	check_color_and_start_position(char *str, int *arr, t_pars *var);
+void	check_map_characters(t_pars *var);
+int		is_valid_player_position(char c);
+void	count_map_width(t_pars *var);
 
 #endif

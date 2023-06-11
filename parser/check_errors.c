@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/11 16:26:56 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/11 23:46:00 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,13 @@ void	count_map_lines(t_pars *var)
 		exit_msg("Error\nThe map is empty\n", 1);
 	var->map_lines_num = -6;
 	if (is_whitespace(line) == 1)
-	{
 		var->map_lines_num++;
-		if (ft_strlen(line) > var->width)
-			var->width = ft_strlen(line);
-	}
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line && is_whitespace(line) == 1)
-		{
 			var->map_lines_num++;
-			if (ft_strlen(line) > var->width)
-				var->width = ft_strlen(line);
-		}
 	}
 	close(fd);
 }
@@ -127,7 +119,7 @@ void	read_and_check_map(char **line, t_pars *var, int fd)
 	var->map[i] = NULL;
 }
 
-int	is_closed(char c)
+int	is_valid_character(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && \
 		c != 'S' && c != 'E' && c != 'W')
@@ -135,7 +127,7 @@ int	is_closed(char c)
 	return (0);
 }
 
-void	check_walls(t_pars *var)
+void	check_map_walls(t_pars *var)
 {
 	int	i;
 	int	j;
@@ -150,15 +142,71 @@ void	check_walls(t_pars *var)
 				exit_msg("Error\nUnexpected tab found in the map\n", 1);
 			if (var->map[i][j] == '0')
 			{
-				if ((j != 0 && is_closed(var->map[i][j - 1])) || \
+				if ((j != 0 && is_valid_character(var->map[i][j - 1])) || \
 					(j < ft_strlen(var->map[i]) && \
-					is_closed(var->map[i][j + 1])) || \
-					(i != 0 && is_closed(var->map[i - 1][j])) || \
-					(i < var->map_lines_num && is_closed(var->map[i + 1][j])))
+					is_valid_character(var->map[i][j + 1])) || \
+					(i != 0 && is_valid_character(var->map[i - 1][j])) || \
+					(i < var->map_lines_num && \
+					is_valid_character(var->map[i + 1][j])))
 					exit_msg("Error\nThe map is not closed\n", 1);
 			}
 			j++;
 		}
+		i++;
+	}
+}
+
+int	is_valid_player_position(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (0);
+	return (1);
+}
+
+void	check_map_characters(t_pars *var)
+{
+	int	i;
+	int	j;
+	int	player_start_postion;
+
+	i = 0;
+	player_start_postion = 0;
+	while (i < var->map_lines_num)
+	{
+		j = 0;
+		while (j < ft_strlen(var->map[i]))
+		{
+			if (is_valid_character(var->map[i][j]) && var->map[i][j] != ' ')
+				exit_msg("Error\nUnexpected character found in the map\n", 1);
+			else if (is_valid_player_position(var->map[i][j]) == 0)
+				player_start_postion++;
+			j++;
+		}
+		i++;
+	}
+	if (!player_start_postion)
+		exit_msg("Error\nPlayer start position not found\n", 1);
+	else if (player_start_postion > 1)
+		exit_msg("Error\nDuplicate player start position found\n", 1);
+}
+
+void	count_map_width(t_pars *var)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	var->width = 0;
+	while (i < var->map_lines_num)
+	{
+		len = 0;
+		len = ft_strlen(var->map[i]);
+		len--;
+		while (var->map[i][len] == ' ')
+			len--;
+		len++;
+		if (len > var->width)
+			var->width = len;
 		i++;
 	}
 }
