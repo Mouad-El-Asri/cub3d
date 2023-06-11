@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/10 23:17:38 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/11 16:26:56 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_whitespace(char *str)
 	return (0);
 }
 
-void	ft_map_lines_count(t_pars *var)
+void	count_map_lines(t_pars *var)
 {
 	int		fd;
 	char	*line;
@@ -38,15 +38,23 @@ void	ft_map_lines_count(t_pars *var)
 	line = get_next_line(fd);
 	if (!line)
 		exit_msg("Error\nThe map is empty\n", 1);
-	var->map_lines_count = -6;
+	var->map_lines_num = -6;
 	if (is_whitespace(line) == 1)
-		var->map_lines_count++;
+	{
+		var->map_lines_num++;
+		if (ft_strlen(line) > var->width)
+			var->width = ft_strlen(line);
+	}
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		if (line && is_whitespace(line) == 1)
-			var->map_lines_count++;
+		{
+			var->map_lines_num++;
+			if (ft_strlen(line) > var->width)
+				var->width = ft_strlen(line);
+		}
 	}
 	close(fd);
 }
@@ -69,7 +77,7 @@ void	check_color_and_start_position(char *str, int *arr, t_pars *var)
 		arr[5]++;
 }
 
-void	ft_check_textures(char **line, t_pars *var, int fd)
+void	read_and_check_textures(char **line, t_pars *var, int fd)
 {
 	int			i;
 	char		*sub_str;
@@ -101,20 +109,56 @@ void	ft_check_textures(char **line, t_pars *var, int fd)
 	}
 }
 
-void	ft_check_map(char **line, t_pars *var, int fd)
+void	read_and_check_map(char **line, t_pars *var, int fd)
 {
 	int	i;
 
 	i = 0;
 	while (is_whitespace(*line) == 0)
 		*line = get_next_line(fd);
-	while (i < var->map_lines_count)
+	while (i < var->map_lines_num)
 	{
 		var->map[i++] = ft_strdup(*line);
 		free(*line);
 		*line = get_next_line(fd);
-		if (i < var->map_lines_count && is_whitespace(*line) == 0)
+		if (i < var->map_lines_num && is_whitespace(*line) == 0)
 			exit_msg("Error\nUnexpected whitespace found in the map\n", 1);
 	}
 	var->map[i] = NULL;
+}
+
+int	is_closed(char c)
+{
+	if (c != '1' && c != '0' && c != 'N' && \
+		c != 'S' && c != 'E' && c != 'W')
+		return (1);
+	return (0);
+}
+
+void	check_walls(t_pars *var)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < var->map_lines_num)
+	{
+		j = 0;
+		while (j < ft_strlen(var->map[i]))
+		{
+			if (var->map[i][j] == '\t')
+				exit_msg("Error\nUnexpected tab found in the map\n", 1);
+			if (var->map[i][j] == '0')
+			{
+				if ((j != 0 && is_closed(var->map[i][j - 1])) || \
+					(j < ft_strlen(var->map[i]) && \
+					is_closed(var->map[i][j + 1])) || \
+					(i != 0 && is_closed(var->map[i - 1][j])) || \
+					(i < var->map_lines_num && is_closed(var->map[i + 1][j])))
+					exit_msg("Error\nThe map is not closed\n", 1);
+			}
+			j++;
+		}
+		i++;
+	}
 }
