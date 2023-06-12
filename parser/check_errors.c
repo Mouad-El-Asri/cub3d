@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/11 23:46:00 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/12 15:59:29 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,35 @@ void	read_and_check_map(char **line, t_pars *var, int fd)
 	int	i;
 
 	i = 0;
+	var->width = 0;
 	while (is_whitespace(*line) == 0)
 		*line = get_next_line(fd);
 	while (i < var->map_lines_num)
 	{
-		var->map[i++] = ft_strdup(*line);
+		var->map[i] = str_space_trim(ft_strdup(*line));
 		free(*line);
 		*line = get_next_line(fd);
 		if (i < var->map_lines_num && is_whitespace(*line) == 0)
 			exit_msg("Error\nUnexpected whitespace found in the map\n", 1);
+		if (ft_strlen(var->map[i]) > var->width)
+			var->width = ft_strlen(var->map[i]);
+		i++;
 	}
 	var->map[i] = NULL;
+}
+
+char	*str_space_trim(char *s)
+{
+	int		back;
+	char	*str;
+
+	if (!s)
+		return (NULL);
+	back = ft_strlen(s) - 1;
+	while (back && ft_strchr(" ", s[back]))
+		back--;
+	str = ft_substr(s, 0, back + 1);
+	return (str);
 }
 
 int	is_valid_character(char c)
@@ -167,10 +185,10 @@ void	check_map_characters(t_pars *var)
 {
 	int	i;
 	int	j;
-	int	player_start_postion;
+	int	player_start_position;
 
 	i = 0;
-	player_start_postion = 0;
+	player_start_position = 0;
 	while (i < var->map_lines_num)
 	{
 		j = 0;
@@ -179,34 +197,13 @@ void	check_map_characters(t_pars *var)
 			if (is_valid_character(var->map[i][j]) && var->map[i][j] != ' ')
 				exit_msg("Error\nUnexpected character found in the map\n", 1);
 			else if (is_valid_player_position(var->map[i][j]) == 0)
-				player_start_postion++;
+				player_start_position++;
 			j++;
 		}
 		i++;
 	}
-	if (!player_start_postion)
+	if (!player_start_position)
 		exit_msg("Error\nPlayer start position not found\n", 1);
-	else if (player_start_postion > 1)
+	else if (player_start_position > 1)
 		exit_msg("Error\nDuplicate player start position found\n", 1);
-}
-
-void	count_map_width(t_pars *var)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	var->width = 0;
-	while (i < var->map_lines_num)
-	{
-		len = 0;
-		len = ft_strlen(var->map[i]);
-		len--;
-		while (var->map[i][len] == ' ')
-			len--;
-		len++;
-		if (len > var->width)
-			var->width = len;
-		i++;
-	}
 }

@@ -36,6 +36,6 @@ void	read_and_check_map(char **line, t_pars *var, int fd);
 void	check_color_and_start_position(char *str, int *arr, t_pars *var);
 void	check_map_characters(t_pars *var);
 int		is_valid_player_position(char c);
-void	count_map_width(t_pars *var);
+char	*str_space_trim(char *s);
 
 #endif
