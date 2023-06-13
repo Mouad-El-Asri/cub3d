@@ -6,18 +6,19 @@
 #    By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 02:03:16 by moel-asr          #+#    #+#              #
-#    Updated: 2023/06/13 00:48:50 by moel-asr         ###   ########.fr        #
+#    Updated: 2023/06/13 02:36:52 by moel-asr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 
 SRC = main.c \
-	./parser/check_errors.c \
-	./parser/check_path_and_map.c \
-	./parser/split_textures.c \
-	./parser/ft_cub_atoi.c \
 	./get_next_line/get_next_line.c \
+	./parser/parse_colors.c \
+	./parser/parse_map.c \
+	./parser/parse_path_and_map.c \
+	./parser/parse_texture.c \
+	./parser/parser_utils.c \
 	./rey_casting/utils.c
 
 OBJ_DIR = files_objects

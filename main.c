@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:00:24 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/06/11 15:57:39 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 02:15:01 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	main(int argc, char **argv)
 {
-	t_pars	var;
+	t_parse_info	data;
 
-	var.args = argc;
-	var.map_path = argv[1];
-	check_path_errors(&var);
-	check_map_and_textures_errors(&var);
+	data.args = argc;
+	data.map_path = argv[1];
+	check_path_errors(&data);
+	check_map_and_texture_errors(&data);
 }
