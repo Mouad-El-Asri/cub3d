@@ -6,17 +6,17 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:32:05 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 02:37:07 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 20:09:21 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	check_colors(t_parse_info *data)
+void check_colors(t_map_info *data)
 {
-	char	*floor_color;
-	char	*ceiling_color;
-	int		i;
+	char *floor_color;
+	char *ceiling_color;
+	int i;
 
 	i = 0;
 	while (i < 6)
@@ -36,10 +36,10 @@ void	check_colors(t_parse_info *data)
 	data->ceiling_rgb = ft_split(ceiling_color, ',');
 }
 
-void	check_rgb_colors_format(t_parse_info *data)
+void check_rgb_colors_format(t_map_info *data)
 {
-	int	count;
-	int	i;
+	int count;
+	int i;
 
 	count = 0;
 	i = 0;
@@ -47,16 +47,16 @@ void	check_rgb_colors_format(t_parse_info *data)
 		count++;
 	if (count != 3)
 		exit_msg("Error\nFloor RGB color format is not valid\n", 1);
-	data->fr = ft_cub_atoi(data->floor_rgb[0]);
-	data->fg = ft_cub_atoi(data->floor_rgb[1]);
-	data->fb = ft_cub_atoi(data->floor_rgb[2]);
+	data->texture_data.fr = ft_cub_atoi(data->floor_rgb[0]);
+	data->texture_data.fg = ft_cub_atoi(data->floor_rgb[1]);
+	data->texture_data.fb = ft_cub_atoi(data->floor_rgb[2]);
 	count = 0;
 	i = 0;
 	while (data->ceiling_rgb[i++])
 		count++;
 	if (count != 3)
 		exit_msg("Error\nCeiling RGB color format is not valid\n", 1);
-	data->cr = ft_cub_atoi(data->ceiling_rgb[0]);
-	data->cg = ft_cub_atoi(data->ceiling_rgb[1]);
-	data->cb = ft_cub_atoi(data->ceiling_rgb[2]);
+	data->texture_data.cr = ft_cub_atoi(data->ceiling_rgb[0]);
+	data->texture_data.cg = ft_cub_atoi(data->ceiling_rgb[1]);
+	data->texture_data.cb = ft_cub_atoi(data->ceiling_rgb[2]);
 }

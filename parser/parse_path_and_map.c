@@ -6,13 +6,13 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 02:38:00 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:26:10 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	check_path_errors(t_parse_info *data)
+void	check_path_errors(t_map_info *data)
 {
 	int	fd;
 
@@ -27,7 +27,7 @@ void	check_path_errors(t_parse_info *data)
 	close(fd);
 }
 
-void	check_map_and_texture_errors(t_parse_info *data)
+void	check_map_and_texture_errors(t_map_info *data)
 {
 	int		fd;
 	char	*line;
@@ -40,6 +40,7 @@ void	check_map_and_texture_errors(t_parse_info *data)
 	read_and_check_texture(&line, data, fd);
 	check_colors(data);
 	check_rgb_colors_format(data);
+	assign_texture_paths(data);
 	read_and_check_map(&line, data, fd);
 	check_map_characters(data);
 	check_map_walls(data);

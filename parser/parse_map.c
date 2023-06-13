@@ -6,13 +6,13 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 02:32:17 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 21:22:44 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	count_map_lines(t_parse_info *data)
+void	count_map_lines(t_map_info *data)
 {
 	int		fd;
 	char	*line;
@@ -35,7 +35,7 @@ void	count_map_lines(t_parse_info *data)
 	close(fd);
 }
 
-void	read_and_check_map(char **line, t_parse_info *data, int fd)
+void	read_and_check_map(char **line, t_map_info *data, int fd)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ void	read_and_check_map(char **line, t_parse_info *data, int fd)
 	data->map[i] = NULL;
 }
 
-void	check_map_walls(t_parse_info *data)
+void	check_map_walls(t_map_info *data)
 {
 	int	i;
 	int	j;
@@ -67,8 +67,6 @@ void	check_map_walls(t_parse_info *data)
 		j = 0;
 		while (j < ft_strlen(data->map[i]))
 		{
-			if (data->map[i][j] == '\t')
-				exit_msg("Error\nUnexpected tab found in the map\n", 1);
 			if (data->map[i][j] == '0')
 			{
 				if ((j == 0) || (j == (ft_strlen(data->map[i]) - 1)) || \
@@ -85,7 +83,7 @@ void	check_map_walls(t_parse_info *data)
 	}
 }
 
-void	check_map_characters(t_parse_info *data)
+void	check_map_characters(t_map_info *data)
 {
 	int	i;
 	int	j;

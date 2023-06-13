@@ -6,7 +6,7 @@
 #    By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 02:03:16 by moel-asr          #+#    #+#              #
-#    Updated: 2023/06/13 02:36:52 by moel-asr         ###   ########.fr        #
+#    Updated: 2023/06/13 19:58:40 by moel-asr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC = main.c \
 	./parser/parse_colors.c \
 	./parser/parse_map.c \
 	./parser/parse_path_and_map.c \
+	./parser/parse_texture_utils.c \
 	./parser/parse_texture.c \
 	./parser/parser_utils.c \
 	./rey_casting/utils.c
