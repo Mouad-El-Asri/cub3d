@@ -6,7 +6,7 @@
 #    By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 16:37:00 by moel-asr          #+#    #+#              #
-#    Updated: 2023/06/10 18:53:10 by moel-asr         ###   ########.fr        #
+#    Updated: 2023/06/13 00:47:40 by moel-asr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
-SRCS = ft_atoi.c \
-	ft_bzero.c \
+SRCS = ft_bzero.c \
 	ft_memcpy.c \
 	ft_memmove.c \
 	ft_memset.c \
+	ft_split.c \
 	ft_strchr.c \
 	ft_strcmp.c \
 	ft_strdup.c \

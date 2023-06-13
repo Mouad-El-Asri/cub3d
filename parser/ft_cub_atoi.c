@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_cub_atoi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:20:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/10 16:23:16 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 01:19:46 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "parser.h"
+
+int	ft_cub_atoi(const char *str)
 {
 	int	i;
 	int	num;
-	int	sign;
 
 	i = 0;
 	num = 0;
-	sign = 1;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (str[i])
 	{
-		if (str[i] == '-')
-			sign *= -1;
+		if (str[i] < 48 || str[i] > 57)
+			exit_msg("Error\nUnexpected character found" \
+				" in the RGB color format\n", 1);
 		i++;
 	}
+	i = 0;
 	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + (str[i] - 48);
-		i++;
-	}
-	return (num * sign);
+		num = num * 10 + (str[i++] - 48);
+	if (num > 255)
+		exit_msg("Error\nRGB color is out of range\n", 1);
+	return (num);
 }

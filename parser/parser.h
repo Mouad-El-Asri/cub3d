@@ -23,8 +23,17 @@ typedef struct s_pars
 	int		width;
 	char	**map;
 	char	**textures;
+	char	**floor_rgb;
+	char	**ceiling_rgb;
+	int		fr;
+	int		fg;
+	int		fb;
+	int		cr;
+	int		cg;
+	int		cb;
 }	t_pars;
 
+int		ft_cub_atoi(const char *str);
 void	check_path_errors(t_pars *var);
 void	check_map_walls(t_pars *var);
 int		is_valid_character(char c);
@@ -36,6 +45,9 @@ void	read_and_check_map(char **line, t_pars *var, int fd);
 void	check_color_and_start_position(char *str, int *arr, t_pars *var);
 void	check_map_characters(t_pars *var);
 int		is_valid_player_position(char c);
+void	check_textures_colors(t_pars *var);
 char	*str_space_trim(char *s);
+char	**split_textures(char const *s);
+void	check_rgb_colors_format(t_pars *var);
 
 #endif

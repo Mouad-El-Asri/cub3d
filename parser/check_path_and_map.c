@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/12 15:59:33 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 00:34:58 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	check_map_and_textures_errors(t_pars *var)
 	var->map = (char **)malloc(sizeof(char *) * (var->map_lines_num));
 	line = get_next_line(fd);
 	read_and_check_textures(&line, var, fd);
+	check_textures_colors(var);
+	check_rgb_colors_format(var);
 	read_and_check_map(&line, var, fd);
 	check_map_characters(var);
 	check_map_walls(var);

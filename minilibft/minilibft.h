@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:35:08 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/10 18:52:53 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 00:47:44 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t len);
 void	*ft_memset(void *s, int c, size_t len);
+char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *str, int c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *str);
