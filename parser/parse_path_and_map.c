@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 21:26:10 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:18:05 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	check_path_errors(t_map_info *data)
 {
-	int	fd;
+	int		fd;
+	char	*extension;
 
+	extension = ft_strstr(data->map_path, ".cub");
 	if (data->args != 2)
 		exit_msg("Error\nThe number of arguments is invalid !!!\n", 1);
 	fd = open(data->map_path, O_RDONLY);
-	if (!(ft_strstr(data->map_path, ".cub")) || \
-		ft_strcmp(ft_strstr(data->map_path, ".cub"), ".cub"))
+	if (!extension || ft_strcmp(extension, ".cub"))
 		exit_msg("Error\nThe file's extension is not correct\n", 1);
 	else if (fd < 0)
 		exit_msg("Error\nThe file doesn't exist !!!\n", 1);
@@ -34,13 +35,21 @@ void	check_map_and_texture_errors(t_map_info *data)
 
 	fd = open(data->map_path, O_RDONLY);
 	data->textures = (char **)malloc(sizeof(char *) * (6 + 1));
+	if (!data->textures)
+		exit_msg("Error\nMemory allocation failed.\n", 1);
 	count_map_lines(data);
-	data->map = (char **)malloc(sizeof(char *) * (data->map_lines_num));
+	if (data->map_lines_num == -6)
+		exit_msg("Error\nThe map is empty\n", 1);
 	line = get_next_line(fd);
 	read_and_check_texture(&line, data, fd);
 	check_colors(data);
 	check_rgb_colors_format(data);
 	assign_texture_paths(data);
+	if (data->map_lines_num == 0)
+		exit_msg("Error\nThere is no map to render\n", 1);
+	data->map = (char **)malloc(sizeof(char *) * (data->map_lines_num));
+	if (!data->map)
+		exit_msg("Error\nMemory allocation failed.\n", 1);
 	read_and_check_map(&line, data, fd);
 	check_map_characters(data);
 	check_map_walls(data);

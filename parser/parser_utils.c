@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:05:43 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 02:34:47 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/14 00:30:49 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,15 @@ int	ft_cub_atoi(const char *str)
 	}
 	i = 0;
 	while (str[i] >= '0' && str[i] <= '9')
+	{
+		if ((num > INT_MAX / 10) || \
+			((num == INT_MAX / 10) && (str[i] - 48 > INT_MAX % 10)))
+			exit_msg("Error\nInteger overflow occurred.\n", 1);
 		num = num * 10 + (str[i++] - 48);
+	}
 	if (num > 255)
 		exit_msg("Error\nRGB color is out of range\n", 1);
 	return (num);
 }
+
+//(num > INT_MAX / 10) || (num == INT_MAX / 10 && str[i] - 48 > INT_MAX % 10)

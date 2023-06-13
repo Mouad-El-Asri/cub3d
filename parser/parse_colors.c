@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:32:05 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 20:09:21 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/14 00:45:26 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void check_colors(t_map_info *data)
 	char *floor_color;
 	char *ceiling_color;
 	int i;
+	int	commas;
 
 	i = 0;
 	while (i < 6)
@@ -32,6 +33,18 @@ void check_colors(t_map_info *data)
 		exit_msg("Error\nFloor RGB color format is not valid\n", 1);
 	if (ft_strchr(ceiling_color, ' ') || ft_strchr(ceiling_color, '\t'))
 		exit_msg("Error\nCeiling RGB color format is not valid\n", 1);
+	i = 0;
+	commas = 0;
+	while (floor_color[i] || ceiling_color[i])
+	{
+		if (floor_color[i] && floor_color[i] == ',')
+			commas++;
+		if (ceiling_color[i] && ceiling_color[i] == ',')
+			commas++;
+		i++;
+	}
+	if (commas != 4)
+		exit_msg("Error\nRGB color format is not valid\n", 1);
 	data->floor_rgb = ft_split(floor_color, ',');
 	data->ceiling_rgb = ft_split(ceiling_color, ',');
 }

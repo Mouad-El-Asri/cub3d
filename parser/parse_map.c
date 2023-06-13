@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 21:22:44 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 23:42:32 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,22 @@ void	check_map_characters(t_map_info *data)
 			if (is_valid_character(data->map[i][j]) && data->map[i][j] != ' ')
 				exit_msg("Error\nUnexpected character found in the map\n", 1);
 			else if (is_valid_player_position(data->map[i][j]) == 0)
+			{
+				if ((j == 0) || (j == (ft_strlen(data->map[i]) - 1)) || \
+					(i == 0) || (i == (data->map_lines_num - 1)) || \
+					(is_valid_character(data->map[i][j - 1])) || \
+					(is_valid_character(data->map[i][j + 1])) || \
+					(is_valid_character(data->map[i - 1][j])) || \
+					(is_valid_character(data->map[i + 1][j])))
+					exit_msg("Error\nThe player position is not valid\n", 1);
 				player_start_position++;
+			}
 			j++;
 		}
 		i++;
 	}
 	if (!player_start_position)
-		exit_msg("Error\nPlayer start position not found\n", 1);
+		exit_msg("Error\nThe Player start position not found\n", 1);
 	else if (player_start_position > 1)
-		exit_msg("Error\nDuplicate player start position found\n", 1);
+		exit_msg("Error\nDuplicate player found\n", 1);
 }

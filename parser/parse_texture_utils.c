@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:49:55 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 19:50:13 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/13 22:42:57 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**split_texture(char const *s)
 		return (NULL);
 	words = ft_count_words(s);
 	if (words < 2)
-		exit_msg("Error\nTextures format is not valid\n", 1);
+		exit_msg("Error\nTexture format is not valid\n", 1);
 	strs = (char **)malloc(sizeof(char *) * (2 + 1));
 	if (!strs)
 		return (NULL);
