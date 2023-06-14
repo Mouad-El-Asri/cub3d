@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 23:18:05 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:43:54 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 void	check_path_errors(t_map_info *data)
 {
+	int		i;
 	int		fd;
-	char	*extension;
+	char	**extensions;
 
-	extension = ft_strstr(data->map_path, ".cub");
 	if (data->args != 2)
 		exit_msg("Error\nThe number of arguments is invalid !!!\n", 1);
 	fd = open(data->map_path, O_RDONLY);
-	if (!extension || ft_strcmp(extension, ".cub"))
+	if (!ft_strstr(data->map_path, ".cub"))
 		exit_msg("Error\nThe file's extension is not correct\n", 1);
-	else if (fd < 0)
+	extensions = ft_split(ft_strstr(data->map_path, ".cub"), '.');
+	i = 0;
+	while (extensions[i])
+	{
+		if (ft_strcmp(extensions[i], "cub"))
+			exit_msg("Error\nThe file's extension is not correct\n", 1);
+		i++;
+	}
+	if (fd < 0)
 		exit_msg("Error\nThe file doesn't exist !!!\n", 1);
 	close(fd);
 }
