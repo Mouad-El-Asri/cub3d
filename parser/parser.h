@@ -49,9 +49,9 @@ void	check_map_and_texture_errors(t_map_info *data);
 
 /* map parsing */
 
-void	check_map_walls(t_map_info *data);
 void	count_map_lines(t_map_info *data);
 void	read_and_check_map(char **line, t_map_info *data, int fd);
+void	check_map_walls(t_map_info *data);
 void	check_map_characters(t_map_info *data);
 
 /* texture parsing */

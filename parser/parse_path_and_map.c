@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/14 11:43:54 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:58:44 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	check_path_errors(t_map_info *data)
 {
 	int		i;
+	int		j;
 	int		fd;
 	char	**extensions;
 
@@ -31,6 +32,10 @@ void	check_path_errors(t_map_info *data)
 			exit_msg("Error\nThe file's extension is not correct\n", 1);
 		i++;
 	}
+	j = 0;
+	while (extensions[j])
+		free(extensions[j++]);
+	free(extensions);
 	if (fd < 0)
 		exit_msg("Error\nThe file doesn't exist !!!\n", 1);
 	close(fd);
@@ -55,10 +60,16 @@ void	check_map_and_texture_errors(t_map_info *data)
 	assign_texture_paths(data);
 	if (data->map_lines_num == 0)
 		exit_msg("Error\nThere is no map to render\n", 1);
-	data->map = (char **)malloc(sizeof(char *) * (data->map_lines_num));
+	data->map = (char **)malloc(sizeof(char *) * (data->map_lines_num + 1));
 	if (!data->map)
 		exit_msg("Error\nMemory allocation failed.\n", 1);
 	read_and_check_map(&line, data, fd);
+	int i = 0;
+	while (data->map[i])
+	{
+		printf("line %d --> %s\n", i, data->map[i]);
+		i++;
+	}
 	check_map_characters(data);
 	check_map_walls(data);
 	close(fd);

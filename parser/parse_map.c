@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 23:42:32 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:09:47 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,31 @@ void	count_map_lines(t_map_info *data)
 void	read_and_check_map(char **line, t_map_info *data, int fd)
 {
 	int	i;
+	char *dup_line;
 
 	i = 0;
 	data->width = 0;
+	dup_line = NULL;
 	while (is_whitespace(*line) == 0)
+	{
+		free(*line);
 		*line = get_next_line(fd);
+	}
 	while (i < data->map_lines_num)
 	{
-		data->map[i++] = str_space_trim(ft_strdup(*line));
+		dup_line = ft_strdup(*line);
+		data->map[i++] = str_space_trim(dup_line);
 		free(*line);
 		*line = get_next_line(fd);
 		if (i < data->map_lines_num && is_whitespace(*line) == 0)
 			exit_msg("Error\nUnexpected whitespace found in the map\n", 1);
 		if (ft_strlen(data->map[i - 1]) > data->width)
 			data->width = ft_strlen(data->map[i - 1]);
+		free(dup_line);
+		dup_line = NULL;
 	}
+	if (*line)
+		free(*line);
 	data->map[i] = NULL;
 }
 
