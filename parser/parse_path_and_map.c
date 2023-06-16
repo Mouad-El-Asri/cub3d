@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/15 17:58:44 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/15 23:41:29 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ void	check_map_and_texture_errors(t_map_info *data)
 	if (!data->map)
 		exit_msg("Error\nMemory allocation failed.\n", 1);
 	read_and_check_map(&line, data, fd);
-	int i = 0;
-	while (data->map[i])
-	{
-		printf("line %d --> %s\n", i, data->map[i]);
-		i++;
-	}
 	check_map_characters(data);
 	check_map_walls(data);
 	close(fd);

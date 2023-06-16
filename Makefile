@@ -6,7 +6,7 @@
 #    By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/08 02:03:16 by moel-asr          #+#    #+#              #
-#    Updated: 2023/06/15 17:54:24 by moel-asr         ###   ########.fr        #
+#    Updated: 2023/06/16 00:57:56 by moel-asr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ OBJ= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC = cc
 
-# CFLAGS=  -Wall -Wextra -Werror
+CFLAGS=  -Wall -Wextra -Werror
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
-# DIB= -fsanitize=address -g3
+DIB= -fsanitize=address -g3
 
 $(RM) = rm -f 
 

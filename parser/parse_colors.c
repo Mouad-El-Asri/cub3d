@@ -6,20 +6,19 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:32:05 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/15 17:55:46 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/15 23:50:45 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void check_colors(t_map_info *data)
+void	check_colors(t_map_info *data)
 {
-	char *floor_color;
-	char *ceiling_color;
-	int i;
-	int	j;
-	int	commas;
-	char **color_parts;
+	char	*floor_color;
+	char	*ceiling_color;
+	int		i;
+	int		j;
+	char	**color_parts;
 
 	i = 0;
 	while (i < 6)
@@ -39,28 +38,37 @@ void check_colors(t_map_info *data)
 		exit_msg("Error\nFloor RGB color format is not valid\n", 1);
 	if (ft_strchr(ceiling_color, ' ') || ft_strchr(ceiling_color, '\t'))
 		exit_msg("Error\nCeiling RGB color format is not valid\n", 1);
+	check_commas_in_rgb_colors(&floor_color, &ceiling_color, data);
+}
+
+void	check_commas_in_rgb_colors(char **color_1, char **color_2, \
+		t_map_info *data)
+{
+	int	i;
+	int	commas;
+
 	i = 0;
 	commas = 0;
-	while (floor_color[i] || ceiling_color[i])
+	while ((*color_1)[i] || (*color_2)[i])
 	{
-		if (floor_color[i] && floor_color[i] == ',')
+		if ((*color_1)[i] && (*color_1)[i] == ',')
 			commas++;
-		if (ceiling_color[i] && ceiling_color[i] == ',')
+		if ((*color_2)[i] && (*color_2)[i] == ',')
 			commas++;
 		i++;
 	}
 	if (commas != 4)
 		exit_msg("Error\nRGB color format is not valid\n", 1);
-	data->floor_rgb = ft_split(floor_color, ',');
-	data->ceiling_rgb = ft_split(ceiling_color, ',');
-	free(floor_color);
-	free(ceiling_color);
+	data->floor_rgb = ft_split(*color_1, ',');
+	data->ceiling_rgb = ft_split(*color_2, ',');
+	free(*color_1);
+	free(*color_2);
 }
 
-void check_rgb_colors_format(t_map_info *data)
+void	check_rgb_colors_format(t_map_info *data)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	count = 0;
 	i = 0;

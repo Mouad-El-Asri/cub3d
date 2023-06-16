@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 18:05:03 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/15 18:09:47 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/16 00:56:07 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	count_map_lines(t_map_info *data)
 {
 	int		fd;
 	char	*line;
-	size_t	lenght;
 
 	fd = open(data->map_path, O_RDONLY);
 	line = get_next_line(fd);
@@ -37,12 +36,11 @@ void	count_map_lines(t_map_info *data)
 
 void	read_and_check_map(char **line, t_map_info *data, int fd)
 {
-	int	i;
-	char *dup_line;
+	int		i;
+	char	*dup_line;
 
 	i = 0;
 	data->width = 0;
-	dup_line = NULL;
 	while (is_whitespace(*line) == 0)
 	{
 		free(*line);
@@ -59,11 +57,10 @@ void	read_and_check_map(char **line, t_map_info *data, int fd)
 		if (ft_strlen(data->map[i - 1]) > data->width)
 			data->width = ft_strlen(data->map[i - 1]);
 		free(dup_line);
-		dup_line = NULL;
 	}
+	data->map[i] = NULL;
 	if (*line)
 		free(*line);
-	data->map[i] = NULL;
 }
 
 void	check_map_walls(t_map_info *data)
@@ -109,16 +106,7 @@ void	check_map_characters(t_map_info *data)
 			if (is_valid_character(data->map[i][j]) && data->map[i][j] != ' ')
 				exit_msg("Error\nUnexpected character found in the map\n", 1);
 			else if (is_valid_player_position(data->map[i][j]) == 0)
-			{
-				if ((j == 0) || (j == (ft_strlen(data->map[i]) - 1)) || \
-					(i == 0) || (i == (data->map_lines_num - 1)) || \
-					(is_valid_character(data->map[i][j - 1])) || \
-					(is_valid_character(data->map[i][j + 1])) || \
-					(is_valid_character(data->map[i - 1][j])) || \
-					(is_valid_character(data->map[i + 1][j])))
-					exit_msg("Error\nThe player position is not valid\n", 1);
-				player_start_position++;
-			}
+				player_start_position += check_player_position(&i, &j, data);
 			j++;
 		}
 		i++;
@@ -127,4 +115,18 @@ void	check_map_characters(t_map_info *data)
 		exit_msg("Error\nThe Player start position not found\n", 1);
 	else if (player_start_position > 1)
 		exit_msg("Error\nDuplicate player found\n", 1);
+}
+
+int	check_player_position(int *i, int *j, t_map_info *data)
+{
+	if (((*j) == 0) || ((*j) == (ft_strlen(data->map[(*i)]) - 1)) || \
+		((*i) == 0) || ((*i) == (data->map_lines_num - 1)) || \
+		(is_valid_character(data->map[(*i)][(*j) - 1])) || \
+		(is_valid_character(data->map[(*i)][(*j) + 1])) || \
+		(is_valid_character(data->map[(*i) - 1][(*j)])) || \
+		(is_valid_character(data->map[(*i) + 1][(*j)])))
+		exit_msg("Error\nThe player position is not valid\n", 1);
+	data->x = (*j);
+	data->y = (*i);
+	return (1);
 }

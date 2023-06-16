@@ -6,15 +6,15 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:57 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/09 17:20:36 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/06/16 00:11:07 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibft.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (str[i])
