@@ -3,41 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   reycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:28:36 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/06/16 00:13:33 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/06 07:11:15 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REYCASTING_H
 # define REYCASTING_H
 
-# include "../cub3d.h"
+# include "../includes/cub3d.h"
+# include "../includes/types.h"
 
-# define BLOCK_SIZE 48
+/*mlx_hook*/
+int		key_press(int key_code, t_data *data);
+int		key_release(int key_code, t_data *data);
 
-# define WIDTH 800
-# define HEIGHT 600
+/*map collision */
+int		wall_collision(t_data *data, double y, double x);
+int		hit_wall(t_data *data, double y, double x);
 
-# define RIGHT 124
-# define LEFT 123
-# define DOWN 125
-# define UP 126
-# define ESC 53
+/* player movement */
 
-typedef struct s_data
-{
-	void			*mlx;
-	void			*mlx_win;
-	char			**map;
-	int				width;
-	int				height;	
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void	move_up(t_data *data);
+void	move_down(t_data *data);
 
-}				t_data;
-
-void	free_list(char **list);
-void	exit_msg(char *msg, int status);
-int		exit_esc(int key_code);
+/*reycasting*/
+void	render_position(t_data *data);
+void	cast_rays(t_data *data);
+void	rey_casting(struct s_map_info *map);
 
 #endif

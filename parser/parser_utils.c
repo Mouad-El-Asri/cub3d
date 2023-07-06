@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:05:43 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/15 18:00:52 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/03 02:50:19 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	is_whitespace(char *str)
 	i = 0;
 	while (str && str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
-			|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		if (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
+			|| str[i] == '\f' || str[i] == '\r')
 			i++;
 		else
 			return (1);
@@ -30,8 +30,7 @@ int	is_whitespace(char *str)
 
 int	is_valid_character(char c)
 {
-	if (c != '1' && c != '0' && c != 'N' && \
-		c != 'S' && c != 'E' && c != 'W')
+	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
 		return (1);
 	return (0);
 }
@@ -67,15 +66,16 @@ int	ft_cub_atoi(const char *str)
 	while (str[i])
 	{
 		if (str[i] < 48 || str[i] > 57)
-			exit_msg("Error\nUnexpected character found" \
-				" in the RGB color format\n", 1);
+			exit_msg("Error\nUnexpected character found"
+						" in the RGB color format\n",
+						1);
 		i++;
 	}
 	i = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if ((num > INT_MAX / 10) || \
-			((num == INT_MAX / 10) && (str[i] - 48 > INT_MAX % 10)))
+		if ((num > INT_MAX / 10) || ((num == INT_MAX / 10) && (str[i]
+					- 48 > INT_MAX % 10)))
 			exit_msg("Error\nInteger overflow occurred.\n", 1);
 		num = num * 10 + (str[i++] - 48);
 	}

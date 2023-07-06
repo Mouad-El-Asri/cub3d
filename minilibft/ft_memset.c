@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 10:59:00 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/06/16 00:13:26 by moel-asr         ###   ########.fr       */
+/*   Created: 2022/10/07 08:57:48 by moel-asr          #+#    #+#             */
+/*   Updated: 2023/06/10 18:52:44 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reycasting.h"
+#include "minilibft.h"
 
-void	exit_msg(char *msg, int status)
+void	*ft_memset(void *s, int c, size_t len)
 {
-	printf("%s", msg);
-	exit(status);
-}
-
-void	free_list(char **list)
-{
-	int	i;
+	size_t				i;
+	unsigned char		*x;
 
 	i = 0;
-	while (list[i])
-		free(list[i++]);
-	free(list);
-}
-
-int	exit_esc(int key_code)
-{
-	if (key_code == ESC)
-		exit_msg("Exit the program with the 'ESC'  button !", 0);
-	return (0);
+	x = (unsigned char *)s;
+	while (len > i)
+	{
+		x[i] = (unsigned char)c;
+		i++;
+	}
+	s = x;
+	return (s);
 }

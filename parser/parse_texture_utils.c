@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 19:49:55 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/13 22:42:57 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/03 02:50:08 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	ft_count_words(char const *s)
 	words = 0;
 	while (s[i])
 	{
-		if ((i > 0 && !ft_separator(s[i]) && ft_separator(s[i - 1])) || \
-			(i == 0 && s[0] != ' ' && s[0] != '\t'))
+		if ((i > 0 && !ft_separator(s[i]) && ft_separator(s[i - 1])) || (i == 0
+				&& s[0] != ' ' && s[0] != '\t'))
 			words++;
 		i++;
 	}
