@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:59:00 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 07:20:27 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/09 03:46:42 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_list(char **list)
 	int	i;
 
 	i = 0;
-	while (list[i])
+	while (list && list[i])
 		free(list[i++]);
 	free(list);
 }
@@ -42,11 +42,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 int	exit_program(int key_code)
 {
+	(void)key_code;
 	exit_msg("Exit the program with the X !!", 0);
 	return (0);
 }
 
-int	convert_color(t_data *dat, char **rgb)
+int	convert_color(char **rgb)
 {
 	unsigned char	red;
 	unsigned char	green;

@@ -6,11 +6,11 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 21:04:25 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 05:54:34 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/09 20:38:57 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "reycasting.h"
+#include "includes/cub3d.h"
 
 int	wall_collision(t_data *data, double y, double x)
 {
@@ -72,8 +72,8 @@ void	cast_rays(t_data *data)
 			* cos(data->rays[i]->ray_angle - data->player.rotation_angle);
 		camera_len = (WIDTH / 2) / tan(data->fov / 2);
 		hight_wall_hit = (TILE_SIZE / data->rays[i]->distance) * camera_len;
-		data->textures->hight_wall_text = (int)hight_wall_hit;
-		draw_3d_map(i, data, data->rays[i]);
+		data->textures->hight_wall_text = hight_wall_hit;
+		draw_3d_map(i, data);
 		ray_angle += (data->fov / WIDTH);
 		free(data->rays[i]);
 		i++;

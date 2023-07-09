@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:00:24 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 14:41:56 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/09 22:14:46 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,3 @@ int	main(int argc, char **argv)
 	get_textures_path(&data);
 	rey_casting(&data);
 }
-
-/* please ila kont baghi t9ed norm ana add it some variables to your struct,
-, if you wanna merge just copy past please don't remove all the folder 'parser' thanks :)" */

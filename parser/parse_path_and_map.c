@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_path_and_map.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/19 17:17:56 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/09 22:13:15 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ void	check_path_errors(t_map_info *data)
 	int		fd;
 	char	**extensions;
 
+	extensions = NULL;
 	if (data->args != 2)
 		exit_msg("Error\nThe number of arguments is invalid !!!\n", 1);
 	fd = open(data->map_path, O_RDONLY);
+	if (fd < 0)
+		exit_msg("Error\nThe file doesn't exist !!!\n", 1);
 	if (!ft_strstr(data->map_path, ".cub"))
 		exit_msg("Error\nThe file's extension is not correct\n", 1);
 	extensions = ft_split(ft_strstr(data->map_path, ".cub"), '.');
@@ -36,8 +39,6 @@ void	check_path_errors(t_map_info *data)
 	while (extensions[j])
 		free(extensions[j++]);
 	free(extensions);
-	if (fd < 0)
-		exit_msg("Error\nThe file doesn't exist !!!\n", 1);
 	close(fd);
 }
 

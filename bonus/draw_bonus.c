@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:48:47 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 06:49:27 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/09 21:13:57 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,6 @@ void	draw_line(struct s_data *data, int y_start, int x_start)
 	}
 }
 
-void	draw_line_clear_rays(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < WIDTH)
-	{
-		data->line.end_x = data->rays[i]->wall_x;
-		data->line.end_y = data->rays[i]->wall_y;
-		if (i == WIDTH / 2)
-			draw_line(data, data->player.player_y, data->player.player_x);
-		free(data->rays[i]);
-		i++;
-	}
-}
-
 void	draw_player_pixels(t_data *data, int i, int j)
 {
 	int	x_start;
@@ -76,26 +60,13 @@ void	draw_player_pixels(t_data *data, int i, int j)
 	}
 }
 
-void	draw_player(t_data *data, char **new)
+void	draw_player(t_data *data)
 {
-	int	i;
-	int	j;
-	int	scaler_width;
-	int	scaler_height;
-
-	j = 0;
-	while (new[j])
-	{
-		i = 0;
-		while (new[j][i])
-		{
-			if (new[j][i] == 'N' || new[j][i] == 'S' || new[j][i] == 'E'
-				|| new[j][i] == 'W')
-				draw_player_pixels(data, (data->player.player_x),
-					data->player.player_y);
-			i++;
-		}
-		j++;
-	}
-	draw_line_clear_rays(data);
+	draw_player_pixels(data, (data->player.player_x),
+		data->player.player_y);
+	data->line.end_x = (data->player.player_x + \
+	cos(data->player.rotation_angle) * 500);
+	data->line.end_y = (data->player.player_y + \
+	sin(data->player.rotation_angle) * 500);
+	draw_line(data, data->player.player_y, data->player.player_x);
 }

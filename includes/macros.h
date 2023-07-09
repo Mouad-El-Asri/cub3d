@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 03:26:11 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 05:06:55 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/09 00:42:57 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define D_RIGHT 2
 
 // player movement --------------------------->
-# define MOVE_SPEED 10
+# define MOVE_SPEED 15
 # define ROTATION_SPEED 0.05
 
 // press ; release code ----------------------->

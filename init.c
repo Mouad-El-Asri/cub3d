@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 07:06:56 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 07:12:08 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/09 20:54:40 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void	init_window_img(t_data *data)
 	if (!data->img)
 		return ;
 	data->mlx_ptr = mlx_init();
+	if (!data->mlx_ptr)
+		exit_msg("failed to initialize the necessary resource to "
+			"fire up the game, sorry for that, please try again later \n", 2);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT,
 			"The_KM_game!");
 	data->img->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);

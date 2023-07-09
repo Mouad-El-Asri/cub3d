@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 06:51:48 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 07:22:51 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/07 23:44:28 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct s_textures
 {
 	int					offset_x;
 	int					offset_y;
-	int					hight_wall_text;
+	double				hight_wall_text;
 	t_img				*texture_north;
 	t_img				*texture_west;
 	t_img				*texture_east;

@@ -68,6 +68,8 @@ void	vertical_ray(t_data *data, t_rey *rays, double angle)
 	double	y_check;
 	double	x_check;
 
+	y_check = 0.0;
+	x_check = 0.0;
 	vertical_intersection(rays, data, angle);
 	vertical_steps(rays, angle);
 	rays->ver_ray.is_wall = 0;

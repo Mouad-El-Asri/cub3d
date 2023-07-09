@@ -6,74 +6,82 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 10:33:07 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/06/12 19:29:40 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/09 22:14:24 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibft.h"
 
-static int	ft_sep(char c1, char c2)
+int	ft_words_count(const char *s, char c)
 {
-	int	i;
+	size_t	i;
+	int		len;
 
 	i = 0;
-	if (c1 == c2)
-		return (1);
-	return (0);
-}
-
-static int	ft_count_words(char const *s, char c)
-{
-	int	i;
-	int	words;
-
-	i = 0;
-	words = 0;
+	len = 0;
 	while (s[i])
 	{
-		if ((!ft_sep(s[i], c) && ft_sep(s[i - 1], c)) || (i == 0 && s[0] != c))
-			words++;
-		i++;
+		if (s[i] == c)
+			i++;
+		else
+		{
+			len++;
+			while (s[i] && s[i] != c)
+				i++;
+		}
 	}
-	return (words);
+	return (len);
 }
 
-static void	ft_split_core(char const *s, char **strs, int words, char c)
+int	get_world_len(char const *sm, char c)
 {
-	int	i;
-	int	j;
-	int	start;
+	int	len;
+
+	len = 0;
+	while (sm[len] && sm[len] != c)
+		len++;
+	return (len);
+}
+
+char **free_stuff(char ** k)
+{
+	int i;
 
 	i = 0;
-	j = 0;
-	while (i < words)
+	while (k[i])
 	{
-		while (s[j] == c)
-			j++;
-		start = j;
-		while (s[j])
-		{
-			if (s[j] == c)
-				break ;
-			j++;
-		}
-		strs[i] = ft_substr(s, start, j - start);
+		free(k[i]);
+		k[i] = NULL;
 		i++;
 	}
-	strs[i] = NULL;
+	free(k);
+	k = NULL;
+	return (k);
+	
 }
-
 char	**ft_split(char const *s, char c)
 {
-	int		words;
-	char	**strs;
+	int		i;
+	char	**k;
 
 	if (!s)
 		return (NULL);
-	words = ft_count_words(s, c);
-	strs = (char **)malloc(sizeof(char *) * words + 1);
-	if (!strs)
+	k = malloc((ft_words_count(s, c) + 1) * (sizeof(char *)));
+	if (!k)
 		return (NULL);
-	ft_split_core(s, strs, words, c);
-	return (strs);
+	i = 0;
+	while (*s)
+	{
+		if (*s == c)
+			s++;
+		else
+		{
+			k[i++] = ft_substr(s, 0, get_world_len(s, c));
+			if (!k)
+				return(free_stuff(k));
+			s += get_world_len(s, c);
+		}
+	}
+	k[i] = 0;
+	return (k);
 }

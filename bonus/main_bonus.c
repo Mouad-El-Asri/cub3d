@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 04:19:42 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 14:52:22 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:37:31 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	render(t_data *data)
 	data->img->addr = mlx_get_data_addr(data->img->img_ptr,
 			&data->img->bits_per_pixel, &data->img->line_length,
 			&data->img->endian);
-	cast_rays_bonus(data);
+	cast_rays(data);
 	render_mini_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0,
 		0);
@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 	t_map_info	map;
 	t_data		*data;
 
+	data = NULL;
 	map.args = argc;
 	map.map_path = argv[1];
 	check_path_errors(&map);

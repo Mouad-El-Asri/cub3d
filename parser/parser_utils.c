@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:05:43 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/07/03 02:50:19 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/06 17:39:18 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int	ft_cub_atoi(const char *str)
 	{
 		if (str[i] < 48 || str[i] > 57)
 			exit_msg("Error\nUnexpected character found"
-						" in the RGB color format\n",
-						1);
+				" in the RGB color format\n", 1);
 		i++;
 	}
 	i = 0;

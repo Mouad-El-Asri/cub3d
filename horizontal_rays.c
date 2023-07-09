@@ -68,6 +68,8 @@ void	horizontal_ray(t_data *data, t_rey *rays, double angle)
 	double	y;
 	double	x;
 
+	y = 0.0;
+	x = 0.0;
 	horizontal_intersection(rays, data, angle);
 	hor_steps(rays, angle);
 	rays->hor_ray.is_wall = 0;

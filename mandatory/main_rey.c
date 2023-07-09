@@ -69,6 +69,7 @@ void	rey_casting(struct s_map_info *map)
 {
 	t_data	*data;
 
+	data = NULL;
 	data = init_data(data, map);
 	game_running(data);
 }

@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 19:22:11 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 05:24:00 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/09 20:41:13 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,4 @@ int	collision(t_data *data, double y, double x)
 		return (0);
 	else
 		return (1);
-}
-
-int	hit_wall(t_data *data, double y, double x)
-{
-	int	y1;
-	int	x1;
-
-	y1 = (y / TILE_SIZE);
-	x1 = (x / TILE_SIZE);
-	if (!data->map->map || !data->map->map[y1]
-		|| !data->map->map[y1][x1])
-		return (0);
-	if (y < 0 || y > data->map->height * TILE_SIZE || x < 0
-		|| x > data->map->width * TILE_SIZE)
-		return (0);
-	if ((data->map->map[y1][x1] != '\0'
-		&& data->map->map[y1][x1] == '1'))
-		return (0);
-	return (1);
 }

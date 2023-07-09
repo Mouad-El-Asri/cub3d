@@ -15,7 +15,6 @@
 
 # include "../includes/cub3d.h"
 
-
 typedef struct s_texture_info
 {
 	int		fr;
@@ -44,7 +43,7 @@ typedef struct s_map_info
 	t_texture_info	texture_data;
 	double			x;
 	double			y;
-	char				**textures_path;
+	char			**textures_path;
 
 }	t_map_info;
 
@@ -59,11 +58,13 @@ void	count_map_lines(t_map_info *data);
 void	read_and_check_map(char **line, t_map_info *data, int fd);
 void	check_map_walls(t_map_info *data);
 void	check_map_characters(t_map_info *data);
+int		check_player_position(int *i, int *j, t_map_info *data);
 
 /* texture parsing */
 
+void	check_color_and_texture(char *str, int *arr);
 void	read_and_check_texture(char **line, t_map_info *data, int fd);
-void	check_color_and_texture(char *str, int *arr, t_map_info *data);
+void	print_texture_error(int *arr);
 void	assign_texture_paths(t_map_info *data);
 
 /* texture parsing utils */
@@ -75,6 +76,8 @@ char	**split_texture(char const *s);
 /* rgb colors parsing */
 
 void	check_colors(t_map_info *data);
+void	check_commas_in_rgb_colors(char **color_1, char **color_2, \
+		t_map_info *data);
 void	check_rgb_colors_format(t_map_info *data);
 
 /* parser utils */
