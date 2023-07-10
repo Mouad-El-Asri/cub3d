@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 09:57:18 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/07 23:44:55 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/10 01:12:53 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void			exit_msg(char *msg, int status);
 
 /*mlx */
 int				exit_program(int key_code);
-void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			mlx_put_pixel_to_img(t_img *img, int x, int y, int color);
 
 /*initialize main struct */
 t_data			*init_data(t_data *data, struct s_map_info *map);
@@ -50,6 +50,7 @@ void			draw_3d_map(int i, t_data *data);
 void			draw_cube(t_data *data, double start, double end, int i);
 void			get_directions(t_rey *rays, double angle);
 void			cast_single_ray(t_data *data, float angle, int index);
+void			render(t_data *data);
 
 /*textures*/
 

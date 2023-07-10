@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:32:05 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/07/06 17:39:57 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:26:45 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,16 @@ void	check_commas_in_rgb_colors(char **color_1, char **color_2, \
 
 	i = 0;
 	commas = 0;
-	while ((*color_1)[i] || (*color_2)[i])
+	while ((*color_1)[i])
 	{
-		if ((*color_1)[i] && (*color_1)[i] == ',')
+		if ((*color_1)[i] == ',')
 			commas++;
-		if ((*color_2)[i] && (*color_2)[i] == ',')
+		i++;
+	}
+	i = 0;
+	while ((*color_2)[i])
+	{
+		if ((*color_2)[i] == ',')
 			commas++;
 		i++;
 	}

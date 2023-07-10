@@ -6,13 +6,13 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 21:04:25 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/09 20:38:57 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/10 02:46:19 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-int	wall_collision(t_data *data, double y, double x)
+int	collision(t_data *data, double y, double x)
 {
 	int	x1[2];
 	int	y1[2];
@@ -21,8 +21,8 @@ int	wall_collision(t_data *data, double y, double x)
 	y1[1] = ((y + 8) / TILE_SIZE);
 	x1[0] = ((x - 8) / TILE_SIZE);
 	x1[1] = ((x + 8) / TILE_SIZE);
-	if (y <= 0 || y >= data->map->height * TILE_SIZE || x <= 0
-		|| x >= data->map->width * TILE_SIZE)
+	if (y <= 0 || y >= (data->map->height * TILE_SIZE)
+		|| x <= 0 || x >= (data->map->width * TILE_SIZE))
 		return (0);
 	else if (data->map->map[y1[0]][x1[0]] == '1')
 		return (0);
@@ -78,4 +78,16 @@ void	cast_rays(t_data *data)
 		free(data->rays[i]);
 		i++;
 	}
+}
+
+void	render(t_data *data)
+{
+	data->img->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->img->addr = mlx_get_data_addr(data->img->img_ptr,
+			&data->img->bits_per_pixel, &data->img->line_length,
+			&data->img->endian);
+	cast_rays(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0,
+		0);
+	mlx_destroy_image(data->mlx_ptr, data->img->img_ptr);
 }

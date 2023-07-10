@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 16:06:44 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/07/09 22:13:15 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/10 00:53:58 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	check_path_errors(t_map_info *data)
 	int		fd;
 	char	**extensions;
 
-	extensions = NULL;
 	if (data->args != 2)
 		exit_msg("Error\nThe number of arguments is invalid !!!\n", 1);
 	fd = open(data->map_path, O_RDONLY);

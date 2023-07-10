@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 10:59:00 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/09 03:46:42 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/10 01:12:49 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_list(char **list)
 	free(list);
 }
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	mlx_put_pixel_to_img(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 

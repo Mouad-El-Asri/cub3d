@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rey_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 07:18:16 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/09 20:54:00 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/10 01:15:11 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	cast_single_ray(t_data *data, float ray_angle, int index)
 	}
 }
 
-unsigned int	get_img_color(t_data *data, t_img *img)
+unsigned int	mlx_get_color_from_img(t_data *data, t_img *img)
 {
 	char	*dst;
 
@@ -56,14 +56,14 @@ unsigned int	get_directions_texture(t_data *data, int i)
 {
 	if (data->rays[i]->is_hors
 		&& data->player.player_y <= data->rays[i]->wall_y)
-		return (get_img_color(data, data->textures->texture_north));
+		return (mlx_get_color_from_img(data, data->textures->texture_north));
 	if (data->rays[i]->is_hors && data->player.player_y > data->rays[i]->wall_y)
-		return (get_img_color(data, data->textures->texture_south));
+		return (mlx_get_color_from_img(data, data->textures->texture_south));
 	if (data->rays[i]->is_vert
 		&& data->player.player_x <= data->rays[i]->wall_x)
-		return (get_img_color(data, data->textures->texture_east));
+		return (mlx_get_color_from_img(data, data->textures->texture_east));
 	if (data->rays[i]->is_vert && data->player.player_x > data->rays[i]->wall_x)
-		return (get_img_color(data, data->textures->texture_west));
+		return (mlx_get_color_from_img(data, data->textures->texture_west));
 	return (1);
 }
 
@@ -84,7 +84,7 @@ void	draw_cube(t_data *data, double start_pos, double end_pos, int i)
 		data->textures->offset_y = dis * ((double)TILE_SIZE / \
 		data->textures->hight_wall_text);
 		color = get_directions_texture(data, i);
-		my_mlx_pixel_put(data->img, i, index, color);
+		mlx_put_pixel_to_img(data->img, i, index, color);
 		index++;
 	}
 }
@@ -103,11 +103,11 @@ void	draw_3d_map(int i, t_data *data)
 		end_pos = HEIGHT;
 	index = 0;
 	while (index <= start_pos)
-		my_mlx_pixel_put(data->img, i, index++,
+		mlx_put_pixel_to_img(data->img, i, index++,
 			convert_color(data->map->ceiling_rgb));
 	draw_cube(data, start_pos, end_pos, i);
 	index = end_pos;
 	while (index < HEIGHT)
-		my_mlx_pixel_put(data->img, i, index++,
+		mlx_put_pixel_to_img(data->img, i, index++,
 			convert_color(data->map->floor_rgb));
 }

@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:05:43 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/07/06 17:39:18 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/10 00:51:07 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	is_whitespace(char *str)
 
 int	is_valid_character(char c)
 {
-	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
+	if (c != '1' && c != '0' && c != 'N' && \
+		c != 'S' && c != 'E' && c != 'W' && c != '#')
 		return (1);
 	return (0);
 }
@@ -49,6 +50,7 @@ char	*str_space_trim(char *s)
 
 	if (!s)
 		return (NULL);
+	str = NULL;
 	back = ft_strlen(s) - 1;
 	while (back && ft_strchr(" ", s[back]))
 		back--;

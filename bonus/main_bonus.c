@@ -6,24 +6,11 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 04:19:42 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/09 20:37:31 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/10 02:38:38 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-void	render(t_data *data)
-{
-	mlx_destroy_image(data->mlx_ptr, data->img->img_ptr);
-	data->img->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->img->addr = mlx_get_data_addr(data->img->img_ptr,
-			&data->img->bits_per_pixel, &data->img->line_length,
-			&data->img->endian);
-	cast_rays(data);
-	render_mini_map(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0,
-		0);
-}
 
 int	loop_hook(t_data *data)
 {

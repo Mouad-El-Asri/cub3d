@@ -6,23 +6,11 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:26:27 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 07:10:10 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/10 02:39:23 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "reycasting.h"
-
-void	render_walls(t_data *data)
-{
-	mlx_destroy_image(data->mlx_ptr, data->img->img_ptr);
-	data->img->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->img->addr = mlx_get_data_addr(data->img->img_ptr,
-			&data->img->bits_per_pixel, &data->img->line_length,
-			&data->img->endian);
-	cast_rays(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img->img_ptr, 0,
-		0);
-}
 
 void	render_player_position(t_data *data)
 {
@@ -54,7 +42,7 @@ int	key_code(t_data *data)
 	mlx_hook(data->win_ptr, 3, 1L << 0, key_release, data);
 	mlx_hook(data->win_ptr, 17, 0, exit_program, data);
 	render_player_position(data);
-	render_walls(data);
+	render(data);
 	return (0);
 }
 

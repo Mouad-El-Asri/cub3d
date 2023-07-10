@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 20:12:59 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 07:10:45 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/10 02:43:51 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	move_left(t_data *data)
 			+ M_PI / 2) * MOVE_SPEED;
 	new_y = (data->player.player_y) - sin(data->player.rotation_angle
 			+ M_PI / 2) * MOVE_SPEED;
-	if (wall_collision(data, new_y, new_x))
+	if (collision(data, new_y, new_x))
 	{
 		data->player.player_x = new_x;
 		data->player.player_y = new_y;
@@ -37,7 +37,7 @@ void	move_right(t_data *data)
 			+ M_PI / 2) * MOVE_SPEED;
 	new_y = (data->player.player_y) + sin(data->player.rotation_angle
 			+ M_PI / 2) * MOVE_SPEED;
-	if (wall_collision(data, new_y, new_x))
+	if (collision(data, new_y, new_x))
 	{
 		data->player.player_x = new_x;
 		data->player.player_y = new_y;
@@ -53,7 +53,7 @@ void	move_up(t_data *data)
 		* MOVE_SPEED;
 	new_y = (data->player.player_y) + sin(data->player.rotation_angle)
 		* MOVE_SPEED;
-	if (wall_collision(data, new_y, new_x))
+	if (collision(data, new_y, new_x))
 	{
 		data->player.player_x = new_x;
 		data->player.player_y = new_y;
@@ -69,7 +69,7 @@ void	move_down(t_data *data)
 		* MOVE_SPEED;
 	new_y = (data->player.player_y) - sin(data->player.rotation_angle)
 		* MOVE_SPEED;
-	if (wall_collision(data, new_y, new_x))
+	if (collision(data, new_y, new_x))
 	{
 		data->player.player_x = new_x;
 		data->player.player_y = new_y;

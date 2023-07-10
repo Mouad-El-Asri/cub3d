@@ -6,7 +6,7 @@
 /*   By: kmahdi <kmahdi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:28:36 by kmahdi            #+#    #+#             */
-/*   Updated: 2023/07/06 17:19:49 by kmahdi           ###   ########.fr       */
+/*   Updated: 2023/07/10 02:43:58 by kmahdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		key_press(int key_code, t_data *data);
 int		key_release(int key_code, t_data *data);
 
 /*map collision */
-int		wall_collision(t_data *data, double y, double x);
+int		collision(t_data *data, double y, double x);
 int		hit_wall(t_data *data, double y, double x);
 
 /* player movement */

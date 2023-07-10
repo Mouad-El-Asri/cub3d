@@ -37,6 +37,7 @@ typedef struct s_map_info
 	int				width;
 	int				height;
 	char			**map;
+	char			**util_map;
 	char			**textures;
 	char			**floor_rgb;
 	char			**ceiling_rgb;
@@ -59,6 +60,11 @@ void	read_and_check_map(char **line, t_map_info *data, int fd);
 void	check_map_walls(t_map_info *data);
 void	check_map_characters(t_map_info *data);
 int		check_player_position(int *i, int *j, t_map_info *data);
+
+/* map parsing utils */
+
+void	read_and_check_map_util(t_map_info *data);
+void	read_map(t_map_info *data);
 
 /* texture parsing */
 

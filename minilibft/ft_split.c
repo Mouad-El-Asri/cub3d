@@ -6,7 +6,7 @@
 /*   By: moel-asr <moel-asr@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 10:33:07 by moel-asr          #+#    #+#             */
-/*   Updated: 2023/07/09 22:14:24 by moel-asr         ###   ########.fr       */
+/*   Updated: 2023/07/10 00:53:35 by moel-asr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	get_world_len(char const *sm, char c)
 	return (len);
 }
 
-char **free_stuff(char ** k)
+char	**free_stuff(char **k)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (k[i])
@@ -57,8 +57,8 @@ char **free_stuff(char ** k)
 	free(k);
 	k = NULL;
 	return (k);
-	
 }
+
 char	**ft_split(char const *s, char c)
 {
 	int		i;
@@ -78,7 +78,7 @@ char	**ft_split(char const *s, char c)
 		{
 			k[i++] = ft_substr(s, 0, get_world_len(s, c));
 			if (!k)
-				return(free_stuff(k));
+				return (free_stuff(k));
 			s += get_world_len(s, c);
 		}
 	}
